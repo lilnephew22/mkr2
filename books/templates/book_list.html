@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Books</h1>
+    <a href="{% url 'book_list_ordered' %}">Order</a>
+    <ul class="list-group">
+        {% for book in books %}
+            <li class="list-group-item">
+                {% if book.cover_image %}
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }} cover" style="max-width: 100px;">
+                {% endif %}
+                <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No books available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
